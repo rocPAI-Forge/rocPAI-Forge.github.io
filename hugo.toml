@@ -1,0 +1,91 @@
+baseURL = "https://rocpai-forge.github.io/"
+title = "rocPAI-Forge"
+theme = "PaperMod"
+defaultContentLanguage = "zh"
+defaultContentLanguageInSubdir = true
+enableRobotsTXT = true
+enableEmoji = true
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[markup.highlight]
+  noClasses = false
+  style = "dracula"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[params]
+  defaultTheme = "dark"
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowToc = true
+  TocOpen = false
+  ShowPostNavLinks = true
+  mainSections = ["posts"]
+
+[params.assets]
+  disableFingerprinting = false
+
+# ---------------- 中文 ----------------
+[languages.zh]
+  languageName = "中文"
+  weight = 1
+  contentDir = "content"
+  [languages.zh.params.homeInfoParams]
+    Title = "rocPAI-Forge"
+    Content = "在 AMD ROCm 上锻造物理智能 — Forging Physical AI on AMD ROCm。这里沉淀我们的技术全景、工程实践与路线规划。"
+
+  [[languages.zh.menu.main]]
+    identifier = "overview"
+    name = "技术全景"
+    url = "/overview/"
+    weight = 1
+  [[languages.zh.menu.main]]
+    identifier = "posts"
+    name = "博客"
+    url = "/posts/"
+    weight = 2
+  [[languages.zh.menu.main]]
+    identifier = "roadmap"
+    name = "路线规划"
+    url = "/roadmap/"
+    weight = 3
+  [[languages.zh.menu.main]]
+    identifier = "tags"
+    name = "标签"
+    url = "/tags/"
+    weight = 4
+
+# ---------------- English ----------------
+[languages.en]
+  languageName = "EN"
+  weight = 2
+  contentDir = "content"
+  [languages.en.params.homeInfoParams]
+    Title = "rocPAI-Forge"
+    Content = "Forging Physical AI on AMD ROCm. Our technical landscape, engineering practice, and roadmap live here."
+
+  [[languages.en.menu.main]]
+    identifier = "overview"
+    name = "Overview"
+    url = "/overview/"
+    weight = 1
+  [[languages.en.menu.main]]
+    identifier = "posts"
+    name = "Blog"
+    url = "/posts/"
+    weight = 2
+  [[languages.en.menu.main]]
+    identifier = "roadmap"
+    name = "Roadmap"
+    url = "/roadmap/"
+    weight = 3
+  [[languages.en.menu.main]]
+    identifier = "tags"
+    name = "Tags"
+    url = "/tags/"
+    weight = 4

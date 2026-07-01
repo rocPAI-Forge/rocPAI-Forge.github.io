@@ -1,0 +1,21 @@
+<div class="mermaid-wrap" style="width:100%;overflow-x:auto;margin:1rem 0;">
+<pre class="mermaid" style="background:transparent;display:flex;justify-content:center;min-width:min-content;">
+{{- .Inner | safeHTML -}}
+</pre>
+</div>
+{{- if not (.Page.Store.Get "hasMermaid") }}
+{{- .Page.Store.Set "hasMermaid" true }}
+<style>
+  .mermaid svg { height: auto; }
+</style>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    securityLevel: 'loose',
+    fontSize: 15,
+    flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis', nodeSpacing: 40, rankSpacing: 45 },
+  });
+</script>
+{{- end }}
