@@ -4,6 +4,9 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+  # 由 tech-blog-pub 仓库 push 后通过 repository_dispatch 触发(见 pub 仓库 notify-site.yml)
+  repository_dispatch:
+    types: [pub-updated]
 
 permissions:
   contents: read
@@ -34,6 +37,16 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+      - name: Checkout content source (tech-blog-pub)
+        uses: actions/checkout@v4
+        with:
+          repository: alexhegit/tech-blog-pub
+          ref: main
+          path: _pub
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Generate Hugo content from pub
+        run: python3 scripts/sync_from_pub.py --pub _pub --out .
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5

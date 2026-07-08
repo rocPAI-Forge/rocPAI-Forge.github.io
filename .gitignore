@@ -3,6 +3,9 @@
 /resources/_gen/
 .hugo_build.lock
 
+# content source checked out during CI (sync_from_pub.py)
+/_pub/
+
 # OS / editor
 .DS_Store
 *.swp
