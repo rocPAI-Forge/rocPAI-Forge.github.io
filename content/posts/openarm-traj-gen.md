@@ -6,6 +6,8 @@ tags = ["AMD ROCm", "PhysicalAI", "VLA", "OpenArm"]
 +++
 
 
+> 📖 本文为**精简版**（~3 分钟）。想深入完整工程细节（设计决策、算法 / reward、诊断、复现命令），请移步 [**技术详解版 →**](https://github.com/alexhegit/tech-blog-pub/blob/main/PhysicalAI/openarm-traj-gen-for-vla/README-details.md)
+
 ## 概要
 
 VLA（Vision-Language-Action）模型很能吃数据，而真机采集又贵又慢。我们换个思路：在
@@ -83,5 +85,4 @@ MUJOCO_GL=egl uv run openarm-mp-demo --object ginger \
 
 按上面的项目就能复现这套"在 AMD ROCm 上为 VLA 造专家轨迹"的实践。
 
-
-> 📖 完整技术细节见 [技术详解版](https://github.com/alexhegit/tech-blog-pub/blob/main/PhysicalAI/openarm-traj-gen-for-vla/README-details.md)。
+> 📖 想了解更多？完整工程细节见 [技术详解版](https://github.com/alexhegit/tech-blog-pub/blob/main/PhysicalAI/openarm-traj-gen-for-vla/README-details.md)。

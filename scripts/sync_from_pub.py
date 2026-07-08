@@ -166,26 +166,32 @@ def build_post(post_dir: Path, meta: dict, content_dir: Path, static_media: Path
         f"https://github.com/{PUB_REPO}/blob/{PUB_BRANCH}/"
         f"{category}/{post_dir.name}/README-details.md"
     )
-    zh_footer = f"\n\n> 📖 完整技术细节见 [技术详解版]({details_url})。"
-    en_footer = f"\n\n> 📖 Full technical details in the [deep-dive]({details_url})."
+    # 显著的详解版入口:开头(hero 之后)引导 + 结尾兜底
+    zh_lead = f"> 📖 本文为**精简版**（~3 分钟）。想深入完整工程细节（设计决策、算法 / reward、诊断、复现命令），请移步 [**技术详解版 →**]({details_url})"
+    en_lead = f"> 📖 This is the **concise version** (~3 min). For the full engineering details (design decisions, algorithm / reward, diagnostics, reproduce commands), read the [**deep-dive →**]({details_url})"
+    zh_footer = f"> 📖 想了解更多？完整工程细节见 [技术详解版]({details_url})。"
+    en_footer = f"> 📖 Want more? Full engineering details in the [deep-dive]({details_url})."
 
-    def assemble(title: str, body: str, footer: str) -> str:
+    def assemble(title: str, body: str, lead: str, footer: str) -> str:
         # promote headings one level up (the '## 中文' wrapper is dropped)
         body = re.sub(r"(?m)^(#{2,5}) ", lambda m: m.group(1)[1:] + " ", body)
         parts = [front_matter(title, meta), ""]
         if hero:
             parts.append(hero)
             parts.append("")
+        parts.append(lead)
+        parts.append("")
         parts.append(body)
+        parts.append("")
         parts.append(footer)
         raw = "\n".join(parts)
         return transform_media(raw, post_dir, slug, static_media)
 
     content_dir.mkdir(parents=True, exist_ok=True)
     (content_dir / f"{slug}.md").write_text(
-        assemble(meta["title_zh"], zh_body, zh_footer), encoding="utf-8")
+        assemble(meta["title_zh"], zh_body, zh_lead, zh_footer), encoding="utf-8")
     (content_dir / f"{slug}.en.md").write_text(
-        assemble(meta["title_en"], en_body, en_footer), encoding="utf-8")
+        assemble(meta["title_en"], en_body, en_lead, en_footer), encoding="utf-8")
     return slug
 
 
