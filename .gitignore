@@ -5,6 +5,7 @@
 
 # content source checked out during CI (sync_from_pub.py)
 /_pub/
+__pycache__/
 
 # OS / editor
 .DS_Store

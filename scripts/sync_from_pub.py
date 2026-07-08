@@ -142,13 +142,15 @@ def split_sections(md: str) -> tuple[list[str], str, str]:
 
 
 def front_matter(title: str, meta: dict) -> str:
-    tags = ", ".join(f'"{t}"' for t in meta.get("tags", []))
+    tags = ", ".join('"' + t + '"' for t in meta.get("tags", []))
+    author = meta.get("author", "")
+    date = str(meta["date"])
     return (
         "+++\n"
-        f'title = "{title}"\n'
-        f"date = {meta['date']}\n"
-        f'author = "{meta.get(\"author\", \"\")}"\n'
-        f"tags = [{tags}]\n"
+        'title = "' + title + '"\n'
+        "date = " + date + "\n"
+        'author = "' + author + '"\n'
+        "tags = [" + tags + "]\n"
         "+++\n"
     )
 
@@ -168,6 +170,8 @@ def build_post(post_dir: Path, meta: dict, content_dir: Path, static_media: Path
     en_footer = f"\n\n> 📖 Full technical details in the [deep-dive]({details_url})."
 
     def assemble(title: str, body: str, footer: str) -> str:
+        # promote headings one level up (the '## 中文' wrapper is dropped)
+        body = re.sub(r"(?m)^(#{2,5}) ", lambda m: m.group(1)[1:] + " ", body)
         parts = [front_matter(title, meta), ""]
         if hero:
             parts.append(hero)
