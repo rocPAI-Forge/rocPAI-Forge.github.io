@@ -1,7 +1,7 @@
 baseURL = "https://rocpai-forge.github.io/"
 title = "rocPAI-Forge"
 theme = "PaperMod"
-defaultContentLanguage = "zh"
+defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true
 enableRobotsTXT = true
 enableEmoji = true
