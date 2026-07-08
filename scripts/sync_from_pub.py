@@ -5,7 +5,7 @@ pub (source of truth) --> Hugo content (generated).
 
 For each pub post `<category>/<slug>/` that has a `meta.toml` with `publish = true`:
   - split the bilingual README.md (## 中文 / ## English) into two Hugo files
-    `content/posts/<slug>.md` and `content/posts/<slug>.en.md` with front matter
+    `content/posts/<slug>.zh.md` and `content/posts/<slug>.en.md` with front matter
     taken from meta.toml;
   - rewrite media: `assets/gifs/x.gif` -> optimized looping `<video>` (mp4 + jpg
     poster) under `static/media/<slug>/`; `assets/images/x.png` -> `/media/<slug>/x.png`;
@@ -188,7 +188,7 @@ def build_post(post_dir: Path, meta: dict, content_dir: Path, static_media: Path
         return transform_media(raw, post_dir, slug, static_media)
 
     content_dir.mkdir(parents=True, exist_ok=True)
-    (content_dir / f"{slug}.md").write_text(
+    (content_dir / f"{slug}.zh.md").write_text(
         assemble(meta["title_zh"], zh_body, zh_lead, zh_footer), encoding="utf-8")
     (content_dir / f"{slug}.en.md").write_text(
         assemble(meta["title_en"], en_body, en_lead, en_footer), encoding="utf-8")
@@ -223,7 +223,7 @@ def main() -> int:
             continue
         slug = build_post(post_dir, meta, content_dir, static_media)
         published.append(slug)
-        print(f"generated: {post_dir.name} -> posts/{slug}.{{md,en.md}} + media/{slug}/")
+        print(f"generated: {post_dir.name} -> posts/{slug}.{{zh.md,en.md}} + media/{slug}/")
 
     print(f"done: {len(published)} post(s): {', '.join(published)}")
     return 0

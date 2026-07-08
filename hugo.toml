@@ -16,6 +16,9 @@ enableEmoji = true
 [outputs]
   home = ["HTML", "RSS", "JSON"]
 
+[pagination]
+  pagerSize = 10
+
 [params]
   defaultTheme = "dark"
   ShowReadingTime = true
