@@ -39,7 +39,7 @@ enableEmoji = true
     Title = "rocPAI-Forge"
     Content = '''在 AMD ROCm 上锻造物理智能 — Forging Physical AI on AMD ROCm。这里沉淀我们的技术全景、工程实践与路线规划。
 
-<p align="center"><img src="/img/rocpai-hero.jpg" alt="rocPAI — Forging Physical AI on AMD ROCm" style="max-width:100%;height:auto;border-radius:.6rem;margin-top:1rem;"></p>'''
+<p align="center"><img src="/img/rocpai-hero.jpg" alt="rocPAI — Forging Physical AI on AMD ROCm" style="width:100%;max-width:640px;height:auto;border-radius:.75rem;box-shadow:0 4px 24px rgba(0,0,0,.12);margin-top:1rem;"></p>'''
 
   [[languages.zh.menu.main]]
     identifier = "overview"
@@ -71,7 +71,7 @@ enableEmoji = true
     Title = "rocPAI-Forge"
     Content = '''Forging Physical AI on AMD ROCm. Our technical landscape, engineering practice, and roadmap live here.
 
-<p align="center"><img src="/img/rocpai-hero.jpg" alt="rocPAI — Forging Physical AI on AMD ROCm" style="max-width:100%;height:auto;border-radius:.6rem;margin-top:1rem;"></p>'''
+<p align="center"><img src="/img/rocpai-hero.jpg" alt="rocPAI — Forging Physical AI on AMD ROCm" style="width:100%;max-width:640px;height:auto;border-radius:.75rem;box-shadow:0 4px 24px rgba(0,0,0,.12);margin-top:1rem;"></p>'''
 
   [[languages.en.menu.main]]
     identifier = "overview"
