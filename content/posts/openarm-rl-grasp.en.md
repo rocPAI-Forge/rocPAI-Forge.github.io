@@ -11,14 +11,38 @@ tags = ["AMD ROCm", "PhysicalAI", "RL", "OpenArm", "UniLab"]
 
 > 📖 This is the **concise version** (~3 min). For the full engineering details (design decisions, algorithm / reward, diagnostics, reproduce commands), read the [**deep-dive →**](https://github.com/alexhegit/tech-blog-pub/blob/main/PhysicalAI/openarm-rl-grasp/README-details.md)
 
+## UniLab & Joint Release
+
+[UniLab](https://github.com/unilabsim/UniLab) is a **heterogeneous robot-RL training
+infrastructure**: **CPU-parallel physics simulation** (MuJoCo / Motrix) and **GPU policy
+learning** are coupled through a unified runtime and shared memory — instead of pinning
+physics, rollout collection, and learning on a single GPU-resident simulation path. Tasks,
+rewards, and backend selection are expressed as Hydra owner YAMLs; training goes through a
+unified `uv run train` / `uv run eval` CLI covering PPO, SAC, TD3, APPO, and more.
+
+We are jointly releasing this practice alongside our system paper
+[**UniLab: A Heterogeneous Architecture for Robot RL Beyond GPU-Dominant Paradigms**](https://arxiv.org/abs/2605.30313)
+([arXiv:2605.30313](https://arxiv.org/abs/2605.30313)). The paper argues that efficient
+training is not about *which processor runs physics*, but whether simulation throughput,
+policy updates, and runtime synchronization form an efficient end-to-end loop — GPU
+simulation is an effective path, but **not a necessary one**. On representative robot-control
+tasks, UniLab improves end-to-end training efficiency by **3–10×** under the same hardware,
+reduces dependence on the NVIDIA CUDA stack, and **natively supports AMD ROCm**, Intel XPU,
+and Apple macOS.
+
+On AMD platforms, ROCm is first-class: `make sync-rocm` sets up the environment; policy
+learning runs on **CUDA / MPS / ROCm / XPU** accelerators while physics stays on
+CPU-multithreaded simulation. This OpenArm grasp experiment is a rocPAI-Forge Physical AI
+practice built on UniLab atop **Instinct MI300X / MI210 + ROCm**.
+
+- **Code:** [github.com/unilabsim/UniLab](https://github.com/unilabsim/UniLab)
+- **Paper:** [arXiv:2605.30313](https://arxiv.org/abs/2605.30313)
+- **Docs:** [UniLab-doc](https://unilabsim.github.io/UniLab-doc/)
+
 ## Overview
 
-On the open-source robot-RL framework [UniLab](https://github.com/unilabsim/UniLab)
-we trained a PPO grasp policy for a single **OpenArm**: pick a 3 cm cube off the
-table, lift it to an in-air goal, and hold it. The whole pipeline runs on **AMD
-Instinct MI300X / MI210 + ROCm** — UniLab uses a **CPU-sim + GPU-training**
-heterogeneous architecture and treats ROCm as first-class (`make sync-rocm` sets
-up the environment in one command).
+On [UniLab](https://github.com/unilabsim/UniLab) we trained a PPO grasp policy for a single
+**OpenArm**: pick a 3 cm cube off the table, lift it to an in-air goal, and hold it.
 
 Final deterministic eval: **ever-success 100%, final-success 87.9%, drop rate 0%**.
 But the interesting part is three moments along the way.

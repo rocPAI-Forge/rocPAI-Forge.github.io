@@ -11,12 +11,35 @@ tags = ["AMD ROCm", "PhysicalAI", "RL", "OpenArm", "UniLab"]
 
 > 📖 本文为**精简版**（~3 分钟）。想深入完整工程细节（设计决策、算法 / reward、诊断、复现命令），请移步 [**技术详解版 →**](https://github.com/alexhegit/tech-blog-pub/blob/main/PhysicalAI/openarm-rl-grasp/README-details.md)
 
+## UniLab 与联合发布
+
+[UniLab](https://github.com/unilabsim/UniLab) 是面向机器人强化学习的**异构训练基础设施**：
+**CPU 侧并行物理仿真**（MuJoCo / Motrix）与 **GPU 侧策略学习**通过统一 runtime 与共享内存
+衔接，而不是把物理、rollout 采集与学习全部绑死在 GPU 仿真路径上。任务、奖励与后端切换由
+Hydra owner YAML 表达；训练入口统一为 `uv run train` / `uv run eval`，覆盖 PPO、SAC、TD3、
+APPO 等算法。
+
+我们同期联合发布了系统论文
+[**UniLab: A Heterogeneous Architecture for Robot RL Beyond GPU-Dominant Paradigms**](https://arxiv.org/abs/2605.30313)
+（[arXiv:2605.30313](https://arxiv.org/abs/2605.30313)）。论文的核心观点是：高效训练的关键
+不在于「物理必须在 GPU 上跑」，而在于仿真吞吐、策略更新与运行时同步能否形成高效的端到端
+闭环——GPU 仿真是有效路径，但**不是唯一路径**。在代表性机器人控制任务上，UniLab 在相同硬件
+配置下将端到端训练效率提升 **3–10×**，同时减少对 NVIDIA CUDA 软件栈的依赖，并**原生支持
+AMD ROCm**、Intel XPU 与 Apple macOS。
+
+对 AMD 平台，ROCm 是一等公民：`make sync-rocm` 即可装好环境，策略学习走
+**CUDA / MPS / ROCm / XPU** 统一加速器路径，物理仿真留在 CPU 多线程并行。本文的 OpenArm
+抓取实验，正是 rocPAI-Forge 在 **Instinct MI300X / MI210 + ROCm** 上用 UniLab 落地的一条
+Physical AI 实践。
+
+- **代码**：[github.com/unilabsim/UniLab](https://github.com/unilabsim/UniLab)
+- **论文**：[arXiv:2605.30313](https://arxiv.org/abs/2605.30313)
+- **文档**：[UniLab-doc](https://unilabsim.github.io/UniLab-doc/)
+
 ## 概要
 
-我们在开源机器人 RL 框架 [UniLab](https://github.com/unilabsim/UniLab) 上，用 PPO 给
-**OpenArm** 的一条手臂训练了一个抓取策略：把桌面上的 3cm 方块抓起、抬到空中目标点并稳稳
-保持。整条链路跑在 **AMD Instinct MI300X / MI210 + ROCm** 上——UniLab 采用 **CPU 仿真 +
-GPU 训练**的异构架构，把 ROCm 作为一等平台，`make sync-rocm` 一条命令即可装好环境。
+我们在 [UniLab](https://github.com/unilabsim/UniLab) 上用 PPO 给 **OpenArm** 的一条手臂
+训练了一个抓取策略：把桌面上的 3cm 方块抓起、抬到空中目标点并稳稳保持。
 
 最终确定性评估：**ever success 100%、final success 87.9%、掉落率 0%**。但真正有意思的
 是过程里的三个瞬间。
