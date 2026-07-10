@@ -2,7 +2,7 @@
 title = "当机械臂自己发明了一种抓法：OpenArm 抓取强化学习实践"
 date = 2026-07-06
 author = "rocPAI-Lab: Alex He, David Li, Andy Luo"
-tags = ["AMD ROCm", "PhysicalAI", "RL", "OpenArm", "UniLab"]
+tags = ["ROCm", "RL", "OpenArm", "UniLab"]
 +++
 
 

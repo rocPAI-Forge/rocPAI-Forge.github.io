@@ -2,7 +2,7 @@
 title = "Feeding the VLA: Generating Expert Grasp Trajectories for OpenArm on AMD ROCm"
 date = 2026-06-30
 author = "rocPAI-Lab: Alex He, David Li, Andy Luo"
-tags = ["AMD ROCm", "PhysicalAI", "VLA", "OpenArm"]
+tags = ["ROCm", "VLA", "OpenArm"]
 +++
 
 

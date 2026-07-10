@@ -2,7 +2,7 @@
 title = "给 VLA 喂饭：在 AMD ROCm 上用 OpenArm 生成抓取专家轨迹"
 date = 2026-06-30
 author = "rocPAI-Lab: Alex He, David Li, Andy Luo"
-tags = ["AMD ROCm", "PhysicalAI", "VLA", "OpenArm"]
+tags = ["ROCm", "VLA", "OpenArm"]
 +++
 
 

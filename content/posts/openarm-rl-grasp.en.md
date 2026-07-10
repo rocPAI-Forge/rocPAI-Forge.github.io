@@ -2,7 +2,7 @@
 title = "When a Robot Arm Invents Its Own Grip: An RL Practice with OpenArm"
 date = 2026-07-06
 author = "rocPAI-Lab: Alex He, David Li, Andy Luo"
-tags = ["AMD ROCm", "PhysicalAI", "RL", "OpenArm", "UniLab"]
+tags = ["ROCm", "RL", "OpenArm", "UniLab"]
 +++
 
 
