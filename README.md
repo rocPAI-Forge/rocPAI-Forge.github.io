@@ -3,7 +3,7 @@
 组织主站（Hugo + PaperMod），发布于 <https://rocpai-forge.github.io/>。中英双语。
 板块：技术全景 Overview（含功能架构图）、博客 Blog、路线规划 Roadmap。
 
-> **内容来源**：博客文章的唯一真源是 [`alexhegit/tech-blog-pub`](https://github.com/alexhegit/tech-blog-pub)，
+> **内容来源**：博客文章的唯一真源是 [`rocPAI-Forge/tech-blog-pub`](https://github.com/rocPAI-Forge/tech-blog-pub)，
 > 本仓库的 `content/posts/` 与 `static/media/` 由脚本从 pub **单向生成**。
 > **发布流程与规则（写什么、怎么发、详解版入口规则）以 pub 的 `AGENTS.md` 为准**；
 > 本 README 只讲**站点构建内部**。
@@ -88,7 +88,7 @@ Hugo ↔ PaperMod 版本耦合，当前锁定：
 ## 构建与部署（CI）
 
 `.github/workflows/deploy.yml`：触发（push `main` / `workflow_dispatch` / 来自 pub 的
-`repository_dispatch:pub-updated`）→ 装固定版 Hugo → checkout `alexhegit/tech-blog-pub` 到
+`repository_dispatch:pub-updated`）→ 装固定版 Hugo → checkout `rocPAI-Forge/tech-blog-pub` 到
 `_pub/` → 装 ffmpeg → `python3 scripts/sync_from_pub.py --pub _pub --out .` → `hugo --gc
 --minify --baseURL <pages_url>` → `upload-pages-artifact` → `deploy-pages`。只提交源码，
 **不提交 `public/`**。

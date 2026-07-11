@@ -40,7 +40,7 @@ jobs:
       - name: Checkout content source (tech-blog-pub)
         uses: actions/checkout@v4
         with:
-          repository: alexhegit/tech-blog-pub
+          repository: rocPAI-Forge/tech-blog-pub
           ref: main
           path: _pub
       - name: Install ffmpeg

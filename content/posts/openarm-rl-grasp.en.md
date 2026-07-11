@@ -9,7 +9,7 @@ tags = ["ROCm", "RL", "OpenArm", "UniLab"]
 <video src="/media/openarm-rl-grasp/play_overview_web.mp4" poster="/media/openarm-rl-grasp/play_overview.jpg" autoplay loop muted playsinline style="width:100%;border-radius:.6rem;"></video>
 <p style="text-align:center;color:#888;font-size:.8rem;">总览回放 / Overview replay</p>
 
-> 📖 This is the **concise version** (~3 min). For the full engineering details (design decisions, algorithm / reward, diagnostics, reproduce commands), read the [**deep-dive →**](https://github.com/alexhegit/tech-blog-pub/blob/main/PhysicalAI/openarm-rl-grasp/README-details.md)
+> 📖 This is the **concise version** (~3 min). For the full engineering details (design decisions, algorithm / reward, diagnostics, reproduce commands), read the [**deep-dive →**](https://github.com/rocPAI-Forge/tech-blog-pub/blob/main/PhysicalAI/openarm-rl-grasp/README-details.md)
 
 ## UniLab & Joint Release
 
@@ -95,4 +95,4 @@ no Python: just a new owner-variant YAML overriding a single field — UniLab's
 > reward/curve analysis → [deep-dive](README-details.md).
 > See also: UniLab PR [#640](https://github.com/unilabsim/UniLab/pull/640).
 
-> 📖 Want more? Full engineering details in the [deep-dive](https://github.com/alexhegit/tech-blog-pub/blob/main/PhysicalAI/openarm-rl-grasp/README-details.md).
+> 📖 Want more? Full engineering details in the [deep-dive](https://github.com/rocPAI-Forge/tech-blog-pub/blob/main/PhysicalAI/openarm-rl-grasp/README-details.md).

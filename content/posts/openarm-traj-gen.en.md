@@ -6,7 +6,7 @@ tags = ["ROCm", "VLA", "OpenArm"]
 +++
 
 
-> 📖 This is the **concise version** (~3 min). For the full engineering details (design decisions, algorithm / reward, diagnostics, reproduce commands), read the [**deep-dive →**](https://github.com/alexhegit/tech-blog-pub/blob/main/PhysicalAI/openarm-traj-gen-for-vla/README-details.md)
+> 📖 This is the **concise version** (~3 min). For the full engineering details (design decisions, algorithm / reward, diagnostics, reproduce commands), read the [**deep-dive →**](https://github.com/rocPAI-Forge/tech-blog-pub/blob/main/PhysicalAI/openarm-traj-gen-for-vla/README-details.md)
 
 ## Overview
 
@@ -94,4 +94,4 @@ Three takeaways:
 The projects above are all you need to reproduce this "generate VLA expert trajectories on
 AMD ROCm" practice hands-on.
 
-> 📖 Want more? Full engineering details in the [deep-dive](https://github.com/alexhegit/tech-blog-pub/blob/main/PhysicalAI/openarm-traj-gen-for-vla/README-details.md).
+> 📖 Want more? Full engineering details in the [deep-dive](https://github.com/rocPAI-Forge/tech-blog-pub/blob/main/PhysicalAI/openarm-traj-gen-for-vla/README-details.md).

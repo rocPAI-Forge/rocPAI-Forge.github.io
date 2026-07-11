@@ -25,7 +25,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-PUB_REPO = "alexhegit/tech-blog-pub"
+PUB_REPO = "rocPAI-Forge/tech-blog-pub"
 PUB_BRANCH = "main"
 
 IMG_RE = re.compile(r"!\[(?P<alt>[^\]]*)\]\((?P<path>assets/[^)]+)\)")
