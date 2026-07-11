@@ -175,6 +175,8 @@ def build_post(post_dir: Path, meta: dict, content_dir: Path, static_media: Path
     def assemble(title: str, body: str, lead: str, footer: str) -> str:
         # promote headings one level up (the '## 中文' wrapper is dropped)
         body = re.sub(r"(?m)^(#{2,5}) ", lambda m: m.group(1)[1:] + " ", body)
+        # relative deep-dive links are valid on GitHub but break on Hugo — rewrite
+        body = body.replace("](README-details.md)", f"]({details_url})")
         parts = [front_matter(title, meta), ""]
         if hero:
             parts.append(hero)

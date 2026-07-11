@@ -92,7 +92,7 @@ no Python: just a new owner-variant YAML overriding a single field — UniLab's
 
 > Training scale: 4096 parallel envs × 24 steps/iter × 1500 iter ≈ **147.5M** sim
 > steps, ~1h49m per run (shared GPU, ~23k steps/s). To reproduce and see the full
-> reward/curve analysis → [deep-dive](README-details.md).
+> reward/curve analysis → [deep-dive](https://github.com/rocPAI-Forge/tech-blog-pub/blob/main/PhysicalAI/openarm-rl-grasp/README-details.md).
 > See also: UniLab PR [#640](https://github.com/unilabsim/UniLab/pull/640).
 
 > 📖 Want more? Full engineering details in the [deep-dive](https://github.com/rocPAI-Forge/tech-blog-pub/blob/main/PhysicalAI/openarm-rl-grasp/README-details.md).
