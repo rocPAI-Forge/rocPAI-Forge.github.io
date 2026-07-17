@@ -75,8 +75,9 @@ def make_video(src: Path, web: Path, poster: Path) -> None:
 
 VIDEO_HTML = (
     '<video src="/media/{slug}/{name}_web.mp4" poster="/media/{slug}/{name}.jpg" '
-    'autoplay loop muted playsinline style="width:100%;border-radius:.6rem;"></video>\n'
-    '<p style="text-align:center;color:#888;font-size:.8rem;">{cap}</p>'
+    'autoplay loop muted playsinline '
+    'style="width:100%;max-width:100%;border-radius:.6rem;display:block;margin:0 auto;"></video>'
+    '<p style="text-align:center;color:#888;font-size:.8rem;margin:.25rem 0 0;">{cap}</p>'
 )
 
 
