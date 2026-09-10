@@ -163,30 +163,37 @@ def build_post(post_dir: Path, meta: dict, content_dir: Path, static_media: Path
     hero_lines, zh_body, en_body = split_sections(readme)
     hero = "\n".join(hero_lines)
 
+    has_details = (post_dir / "README-details.md").exists()
     details_url = (
         f"https://github.com/{PUB_REPO}/blob/{PUB_BRANCH}/"
         f"{category}/{post_dir.name}/README-details.md"
     )
-    # 显著的详解版入口:开头(hero 之后)引导 + 结尾兜底
-    zh_lead = f"> 📖 本文为**精简版**（~3 分钟）。想深入完整工程细节（设计决策、算法 / reward、诊断、复现命令），请移步 [**技术详解版 →**]({details_url})"
-    en_lead = f"> 📖 This is the **concise version** (~3 min). For the full engineering details (design decisions, algorithm / reward, diagnostics, reproduce commands), read the [**deep-dive →**]({details_url})"
-    zh_footer = f"> 📖 想了解更多？完整工程细节见 [技术详解版]({details_url})。"
-    en_footer = f"> 📖 Want more? Full engineering details in the [deep-dive]({details_url})."
+    # 只有存在技术详解版时，才插入显著的详解版入口。
+    if has_details:
+        zh_lead = f"> 📖 本文为**精简版**（~3 分钟）。想深入完整工程细节（设计决策、算法 / reward、诊断、复现命令），请移步 [**技术详解版 →**]({details_url})"
+        en_lead = f"> 📖 This is the **concise version** (~3 min). For the full engineering details (design decisions, algorithm / reward, diagnostics, reproduce commands), read the [**deep-dive →**]({details_url})"
+        zh_footer = f"> 📖 想了解更多？完整工程细节见 [技术详解版]({details_url})。"
+        en_footer = f"> 📖 Want more? Full engineering details in the [deep-dive]({details_url})."
+    else:
+        zh_lead = en_lead = zh_footer = en_footer = ""
 
     def assemble(title: str, body: str, lead: str, footer: str) -> str:
         # promote headings one level up (the '## 中文' wrapper is dropped)
         body = re.sub(r"(?m)^(#{2,5}) ", lambda m: m.group(1)[1:] + " ", body)
         # relative deep-dive links are valid on GitHub but break on Hugo — rewrite
-        body = body.replace("](README-details.md)", f"]({details_url})")
+        if has_details:
+            body = body.replace("](README-details.md)", f"]({details_url})")
         parts = [front_matter(title, meta), ""]
         if hero:
             parts.append(hero)
             parts.append("")
-        parts.append(lead)
-        parts.append("")
+        if lead:
+            parts.append(lead)
+            parts.append("")
         parts.append(body)
-        parts.append("")
-        parts.append(footer)
+        if footer:
+            parts.append("")
+            parts.append(footer)
         raw = "\n".join(parts)
         return transform_media(raw, post_dir, slug, static_media)
 
